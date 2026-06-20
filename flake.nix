@@ -36,7 +36,9 @@
               pkgs.nodejs
             ];
             shellHook = ''
-              echo "vite-plus ready: $(vp --version | head -n1)"
+              # `sed -n 1p` drains all of `vp`'s output; piping to `head -n1`
+              # closes the pipe early and makes `vp` panic with EPIPE.
+              echo "vite-plus ready: $(vp --version 2>/dev/null | sed -n 1p)"
               echo "Try:  vp --help"
             '';
           };
