@@ -38,27 +38,34 @@ This runs the same flake inside the official Nix image. Good for a quick check
 on a machine that only has Docker.
 
 ```sh
-docker run --rm -it \
-  nixos/nix:latest \
-  sh -c '
-    nix --extra-experimental-features "nix-command flakes" \
+docker run --rm -it nixos/nix:latest sh -c '
+  nix --extra-experimental-features "nix-command flakes" \
+      --option filter-syscalls false \
       run github:why-reproductions-are-required/vite-plus-nix-demo -- --version
-  '
+'
 ```
 
 Or drop into the dev shell:
 
 ```sh
-docker run --rm -it nixos/nix:latest \
+docker run --rm -it nixos/nix:latest sh -c '
   nix --extra-experimental-features "nix-command flakes" \
-    develop github:why-reproductions-are-required/vite-plus-nix-demo
+      --option filter-syscalls false \
+      develop github:why-reproductions-are-required/vite-plus-nix-demo
+'
 # then: vp --help
 ```
 
-> First run downloads nixpkgs and builds `vp`, so it takes a few minutes.
-> On Apple Silicon, the `nixos/nix` image runs x86_64 under emulation, which
-> only validates the **Linux** build. To validate the macOS build you need Nix
-> installed natively on macOS.
+> `--option filter-syscalls false` avoids a `seccomp BPF` error that the
+> `nixos/nix` image hits on some Docker hosts (notably Docker Desktop / OrbStack
+> on Apple Silicon).
+>
+> First run downloads nixpkgs and compiles `vp` from source (a Rust build, give
+> it ~15 min); later runs are instant.
+>
+> On Apple Silicon the `nixos/nix` image runs under emulation, so this only
+> validates the **Linux** build. To validate the macOS build, install Nix
+> natively on macOS (see below).
 
 ## Using `vp` in a real project
 
