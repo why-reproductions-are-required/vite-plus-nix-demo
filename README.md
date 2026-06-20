@@ -42,7 +42,7 @@ docker run --rm -it \
   nixos/nix:latest \
   sh -c '
     nix --extra-experimental-features "nix-command flakes" \
-      run github:fengmk2/vite-plus-nix-demo -- --version
+      run github:why-reproductions-are-required/vite-plus-nix-demo -- --version
   '
 ```
 
@@ -51,7 +51,7 @@ Or drop into the dev shell:
 ```sh
 docker run --rm -it nixos/nix:latest \
   nix --extra-experimental-features "nix-command flakes" \
-    develop github:fengmk2/vite-plus-nix-demo
+    develop github:why-reproductions-are-required/vite-plus-nix-demo
 # then: vp --help
 ```
 
