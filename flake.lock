@@ -1,0 +1,27 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1781964284,
+        "narHash": "sha256-EEVgRWAzFaE7Cwau7Z3nZrul0ATDZggn9GxNnREd+VM=",
+        "owner": "fengmk2",
+        "repo": "nixpkgs",
+        "rev": "2db9b55770c86d8fb501e82669750c6e31ca578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fengmk2",
+        "ref": "vite-plus-init",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
